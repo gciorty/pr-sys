@@ -1,9 +1,9 @@
 <html>
-<body>
+  <body>
 
-<footer>
+    <footer>
 
-</footer>
+    </footer>
 
-</body>
+  </body>
 </html>
