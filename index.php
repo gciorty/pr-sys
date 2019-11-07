@@ -23,6 +23,8 @@
             <form class="login-form" action="includes/login.inc.php" method="post">
               <input type="text" name="userID" placeholder="User ID"/>
               <input type="password" name="pwd" placeholder="Password"/>
+              <p><input type="text" name="captcha" placeholder="Enter CAPTCHA code below"></p>
+              <p><img src="includes/captcha.inc.php" width="120" height="30" border="1" alt="CAPTCHA"></p>
               <button type="submit" name="login-submit">login</button>
               <p class="message">Not Registred? <a href="signup.php"><strong>Create an account</strong></a></p>
             </form>

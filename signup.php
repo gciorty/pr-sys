@@ -36,6 +36,8 @@
               <input type="text" name="email" placeholder="Email"/>
               <input type="password" name="pwd" placeholder="Password"/>
               <input type="password" name="pwd-repeat" placeholder="Repeat Password"/>
+              <p><input type="text" name="captcha" placeholder="Enter CAPTCHA code below"></p>
+              <p><img src="includes/captcha.inc.php" width="120" height="30" border="1" alt="CAPTCHA"></p>
               <button type="submit" name="signup-submit">Create</button>
               <p class="message">Already have an account? <a href="index.php"><strong>Click here</strong></a></p>
             </form>
