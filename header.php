@@ -37,8 +37,14 @@ if (!isset($_SESSION['userID'])) {
             <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
               <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="members.php">Group Members</a>
+                <li class="nav-item" >
+                <?php
+                  if (basename($_SERVER['PHP_SELF']) == 'members.php'){
+                    echo '<a class="nav-link" style="color:white" href="members.php" active>Group Members</a>';
+                  } else {
+                      echo '<a class="nav-link"  href="members.php">Group Members</a>';
+                  }
+                ?>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Link</a>
