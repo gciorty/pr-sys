@@ -17,7 +17,22 @@
         <div class="page-header">
           <h1>Peer Review System</h1>
         </div>
-
+        <div>
+          <?php
+              if (isset($_GET['signup'])) {
+                  if ($_GET['signup'] == "success") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> You are now registered. Please Login.</div>';
+                  }
+              } else if (isset($_GET['error'])) {
+                  if ($_GET['error'] == "emptyfields") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> You missed an input field.</div>';
+                  }
+                  if ($_GET['error'] == "captchaerr") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
+                  }
+              }
+          ?>
+        </div>
         <div class="login-page">
           <div class="form">
             <form class="login-form" action="includes/login.inc.php" method="post">
@@ -32,20 +47,7 @@
             </form>
           </div>
         </div>
-        <?php
-            if (isset($_GET['signup'])) {
-                if ($_GET['signup'] == "success") {
-                    echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> You are now registered. Please Login.</div>';
-                }
-            } else if (isset($_GET['error'])) {
-                if ($_GET['error'] == "emptyfields") {
-                    echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> You missed an input field.</div>';
-                }
-                if ($_GET['error'] == "captchaerr") {
-                    echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
-                }
-            }
-        ?>
+
       </div>
 
       <script type="text/javascript">

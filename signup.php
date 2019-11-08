@@ -29,6 +29,7 @@
               }
           ?>
         </div>
+
         <div class="login-page">
           <div class="form">
             <form class="reg-form" action="includes/signup.inc.php" method="post">
