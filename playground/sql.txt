@@ -1,0 +1,22 @@
+// CREATE GROUP TABLE
+
+CREATE TABLE groups (
+    PK_ID int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    GroupName tinytext,
+    Approved BOOLEAN
+);
+
+CREATE TABLE users (
+    PK_ID int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    userID tinytext,
+    email tinytext,
+    password tinytext,
+    FK_GroupID int(11)
+);
+
+ALTER TABLE users
+ADD FOREIGN KEY (FK_GroupID) REFERENCES groups(PK_ID);
+
+INSERT INTO users (userID, email, pwdUser, FK_GroupID) VALUES ('456456456', 'testicolo@gmail.com', 'Test123', 0)
+
+ALTER TABLE users ADD UNIQUE (userID)

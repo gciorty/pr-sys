@@ -34,6 +34,7 @@ if (isset($_POST['login-submit'])) { //check that the request comes from login-s
                     session_start();
                     $_SESSION['userID'] = $row['userID'];
                     $_SESSION['email'] = $row['email'];
+                    $_SESSION['group'] = $row['FK_GroupID'];
                     header("Location: ../home.php?login=success");
                     exit();
                 } else {

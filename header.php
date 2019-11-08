@@ -39,6 +39,8 @@ session_start()
                 <li class="nav-item">
                   <a class="nav-link" href="#">Link</a>
                 </li>
+              </ul>
+              <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                   <a class="nav-link" href="includes/logout.inc.php">Logout</a>
                 </li>

@@ -7,9 +7,10 @@ session_start();
     $email = $_POST['email'];
     $password = $_POST['pwd'];
     $repeatPassword = $_POST['pwd-repeat'];
+    $group = $_POST['group'];
     $captcha = $_POST['captcha'];
 
-    if (empty($username) || empty($email )|| empty($password) || empty($repeatPassword) || empty($captcha)) {
+    if (empty($username) || empty($email )|| empty($password) || empty($repeatPassword) || empty($captcha) || empty($group)) {
         header("Location: ../signup.php?error=emptyfields&uid=".$username."&email=".$email);
         exit();
     }
@@ -44,7 +45,7 @@ session_start();
                 header("Location: ../signup.php?error=usertaken&email=".$email);
                 exit();
             } else {
-                $sql = "INSERT INTO users (userID, email, pwdUser) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO users (userID, email, pwdUser, FK_GroupID) VALUES (?, ?, ?, ?)";
                 $stmt = mysqli_stmt_init($connection);
                 if (! mysqli_stmt_prepare($stmt,$sql)) {
                     header("Location: ../signup.php?error=sqlerror");
@@ -52,7 +53,7 @@ session_start();
                 } else {
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
+                    mysqli_stmt_bind_param($stmt, "sssi", $username, $email, $hashedPwd, $group);
                     mysqli_stmt_execute($stmt);
                     header("Location: ../signup.php?signup=success");
                     exit();
