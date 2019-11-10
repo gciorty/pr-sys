@@ -18,10 +18,13 @@
           <?php
               if (isset($_GET['error'])) {
                   if ($_GET['error'] == "emptyfields") {
-                      echo '<p>Please fill in all fields</p>';
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Please fill all fields.</div>';
                   } else if ($_GET['error'] == "invalidemail") {
-                      echo '<p>Use valid email address</p>';
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Please use valid email address</div>';
                   }
+                } else if ($_GET['error'] == "captchaerr") {
+                    echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
+                }
               } else if (isset($_GET['signup'])) {
                   if ($_GET['signup'] == "success") {
                       header("Location: index.php?signup=success");

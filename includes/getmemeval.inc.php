@@ -4,9 +4,9 @@
 
   if (isset($_POST['selectmem-submit'])){
     $mReview = array();
-    $userID = $_SESSION['userID'];
     $_SESSION['memberToMark'] = $_POST['memberToMark'];
-    if (empty($userID) || empty($_SESSION['memberToMark'])) {
+
+    if (empty($_SESSION['userID']) || empty($_SESSION['memberToMark'])) {
       header("Location: ../members.php?error=emptyfields".$userID);
       exit();
     } else {
@@ -16,7 +16,7 @@
       if (!mysqli_stmt_prepare($stmt,$sql)) {
         header("Location: ../members.php?error=sqlerror");
       } else {
-        mysqli_stmt_bind_param($stmt, "ss", $userID, $_SESSION['memberToMark']);
+        mysqli_stmt_bind_param($stmt, "ss", $_SESSION['userID'], $_SESSION['memberToMark']);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
@@ -28,7 +28,12 @@
         }
       }
       $_SESSION['memberReview'] = $mReview;
-      header("Location: ../memberreview.php");
+      if ($_SESSION['memberReview'][2] == 0) {
+        header("Location: ../memberreview.php");
+      } else if ($_SESSION['memberReview'][2] == 1) {
+        header("Location: ../home.php?error=finalized");
+      }
+
     }
   } else {
     header("Location: ../index.php");

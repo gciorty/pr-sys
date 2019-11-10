@@ -56,9 +56,16 @@ require "header.php";
             </div>
             <br>
             <button class="btn btn-primary" name="review-form" type="submit">Submit Evaluation</button>
+
           </div>
         </form>
-
+        <hr>
+        <div class="col-auto">
+          <form name="del-eval" class="del-eval" action="includes/deleval.inc.php" method="post">
+            <p>Becareful! This deletes the provisioned evaluation submitted</p>
+            <button class="btn btn-danger" name="delete-review" type="submit">Delete Evaluation</button>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -68,11 +75,7 @@ require "header.php";
         var radioButton = document.getElementsByName("rating");
         for(var i=0; i<radioButton.length; i++)
            radioButton[i].checked = false;
-      }
-      function getSelMember() {
-        var e = document.getElementById("inlineFormCustomSelect");
-        var strUser = e.options[e.selectedIndex].text;
-        document.getElementById("selectedUser").value = strUser;
+        console.log('reset form actioned');
       }
     </script>
 

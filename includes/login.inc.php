@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_POST['selectmem-submit'])) { //check that the request comes from login-submit
+if (isset($_POST['login-submit'])) { //check that the request comes from login-submit
   require 'dbh.inc.php';
 
   $userID = $_POST['userID'];

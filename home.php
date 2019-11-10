@@ -5,6 +5,19 @@ require "header.php";
 <body>
 <html>
   <div class="container my-3 py-3 z-depth-1">
+    <div>
+      <?php
+          if (isset($_GET['review'])) {
+              if ($_GET['review'] == "success") {
+                  echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong>You have updated your review</div>';
+              }
+          } else if (isset($_GET['error'])) {
+              if ($_GET['error'] == "finalized") {
+                  echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> You finalized the review for the specific member.</div>';
+              }
+          }
+      ?>
+    </div>
     <div class="jumbotron">
     <!--Section: Content-->
     <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
