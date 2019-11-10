@@ -2,21 +2,38 @@
 
 CREATE TABLE groups (
     PK_ID int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    GroupName tinytext,
-    Approved BOOLEAN
+    groupName tinytext UNIQUE,
+    approved BOOLEAN
 );
 
 CREATE TABLE users (
-    PK_ID int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    userID tinytext,
-    email tinytext,
+    userID int(11) UNIQUE PRIMARY KEY NOT NULL,
+    email tinytext UNIQUE,
     password tinytext,
     FK_GroupID int(11)
 );
+
+CREATE TABLE reviews (
+  PK_ID int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  rateValue int(10),
+  rateJustification text,
+  image BLOB,
+  finalized BOOLEAN,
+  Marker int(11),
+  FK_MarkedUserID int(11)
+);
+
+ALTER TABLE reviews
+ADD FOREIGN KEY (FK_Marker) REFERENCES users(userID);
+
+ALTER TABLE reviews
+ADD FOREIGN KEY (FK_MarkedUserID) REFERENCES users(userID);
 
 ALTER TABLE users
 ADD FOREIGN KEY (FK_GroupID) REFERENCES groups(PK_ID);
 
 INSERT INTO users (userID, email, pwdUser, FK_GroupID) VALUES ('456456456', 'testicolo@gmail.com', 'Test123', 0)
+
+INSERT INTO reviews (rateValue, rateJustification, finalized, FK_Marker, FK_MarkedUserID) VALUES ('456456456', 'testicolo@gmail.com', 'Test123', 0)
 
 ALTER TABLE users ADD UNIQUE (userID)
