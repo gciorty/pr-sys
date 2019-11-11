@@ -7,9 +7,9 @@ require "header.php";
   <div class="container my-3 py-3 z-depth-1">
     <div>
       <?php
-          if (isset($_GET['review'])) {
-              if ($_GET['review'] == "success") {
-                  echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong>You have updated your review</div>';
+          if (isset($_GET['success'])) {
+              if ($_GET['success'] == "reviewdeleted") {
+                  echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> You have delete the review for the member.</div>';
               }
           } else if (isset($_GET['error'])) {
               if ($_GET['error'] == "finalized") {
