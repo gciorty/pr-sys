@@ -22,8 +22,12 @@ if (isset($_POST['signup-submit'])) { //check that the request comes from signup
       header("Location: ../signup.php?error=invalidemailformat");
       exit();
   }
-  else if (!preg_match("/^[0-9]*$/", $username)) {
+  else if (!preg_match("/^[0-9]{9,10}$/", $username)) {
       header("Location: ../signup.php?error=invalidUserID");
+      exit();
+  }
+  else if (!preg_match("/((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,32})/", $password)) {
+      header("Location: ../signup.php?error=passwordStrenght");
       exit();
   }
   else if ($password !== $repeatPassword) {

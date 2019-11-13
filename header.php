@@ -38,24 +38,56 @@ if (!isset($_SESSION['userID'])) {
             <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
               <ul class="navbar-nav">
-                <li class="nav-item" >
                 <?php
-                  if (basename($_SERVER['PHP_SELF']) == 'members.php'){
-                    echo '<a class="nav-link" style="color:white" href="members.php" active>Group Members</a>';
-                  } else {
-                      echo '<a class="nav-link"  href="members.php">Group Members</a>';
+                  if ($_SESSION['userID'] != 0) {
+                    if (basename($_SERVER['PHP_SELF']) == 'members.php'){
+                      echo '<li class="nav-item" >
+                              <a class="nav-link" style="color:white" href="members.php" active>Group Members</a>
+                            </li>';
+                    } else {
+                        echo '<li class="nav-item" >
+                                <a class="nav-link"  href="members.php">Group Members</a>
+                              </li>';
+                    }
                   }
                 ?>
-                </li>
-                <li class="nav-item">
-                  <?php
-                    if (basename($_SERVER['PHP_SELF']) == 'about.php'){
-                      echo '<a class="nav-link" style="color:white" href="about.php" active>About</a>';
+                <?php
+                  if ($_SESSION['userID'] == 0) {
+                    if (basename($_SERVER['PHP_SELF']) == 'managegroups.php'){
+                      echo '<li class="nav-item" >
+                              <a class="nav-link" style="color:white" href="managegroups.php" active>Groups</a>
+                            </li>';
                     } else {
-                        echo '<a class="nav-link"  href="about.php">About</a>';
+                        echo '<li class="nav-item" >
+                                <a class="nav-link"  href="managegroups.php">Groups</a>
+                              </li>';
                     }
-                  ?>
-                </li>
+                  }
+                ?>
+                <?php
+                  if ($_SESSION['userID'] == 0) {
+                    if (basename($_SERVER['PHP_SELF']) == 'managestudents.php'){
+                      echo '<li class="nav-item" >
+                              <a class="nav-link" style="color:white" href="managestudents.php" active>Students</a>
+                            </li>';
+                    } else {
+                        echo '<li class="nav-item" >
+                                <a class="nav-link"  href="managestudents.php">Students</a>
+                              </li>';
+                    }
+                  }
+                ?>
+                <?php
+                  if (basename($_SERVER['PHP_SELF']) == 'about.php'){
+                    echo '<li class="nav-item">
+                            <a class="nav-link" style="color:white" href="about.php" active>About</a>
+                          </li>';
+                  } else {
+                      echo '<li class="nav-item">
+                              <a class="nav-link"  href="about.php">About</a>
+                            </li>';
+                  }
+                ?>
               </ul>
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
