@@ -48,7 +48,13 @@ if (!isset($_SESSION['userID'])) {
                 ?>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">About</a>
+                  <?php
+                    if (basename($_SERVER['PHP_SELF']) == 'about.php'){
+                      echo '<a class="nav-link" style="color:white" href="about.php" active>About</a>';
+                    } else {
+                        echo '<a class="nav-link"  href="about.php">About</a>';
+                    }
+                  ?>
                 </li>
               </ul>
               <ul class="navbar-nav ml-auto">

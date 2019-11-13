@@ -10,7 +10,7 @@
       header("Location: ../members.php?error=emptyfields".$userID);
       exit();
     } else {
-      $sql = "SELECT rateValue,rateJustification,finalized,FK_MarkedUserID FROM reviews WHERE (FK_Marker=? AND FK_MarkedUserID=?)";
+      $sql = "SELECT rateValue,rateJustification,image,imagetype,finalized,FK_MarkedUserID FROM reviews WHERE (FK_Marker=? AND FK_MarkedUserID=?)";
       $stmt = mysqli_stmt_init($connection);
 
       if (!mysqli_stmt_prepare($stmt,$sql)) {
@@ -28,9 +28,9 @@
         }
       }
       $_SESSION['memberReview'] = $mReview;
-      if ($_SESSION['memberReview'][2] == 0) {
+      if ($_SESSION['memberReview'][4] == 0) {
         header("Location: ../memberreview.php");
-      } else if ($_SESSION['memberReview'][2] == 1) {
+      } else if ($_SESSION['memberReview'][4] == 1) {
         header("Location: ../home.php?error=finalized");
       }
 

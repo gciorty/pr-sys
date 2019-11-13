@@ -8,7 +8,7 @@ require "header.php";
         <h1 class="display-4">Member Evaluation Form</h1>
         <p class="lead">Please evaluate your member.</p>
         <hr>
-        <form name="review-form" class="review-form" action="includes/performeval.inc.php" method="post">
+        <form name="review-form" class="review-form" action="includes/performeval.inc.php" method="post" enctype="multipart/form-data">
           <div class="col-auto">
           <p><strong>Selected Member</strong></p>
           <input type="text" name="selectedUser" value="<?php echo $_SESSION['memberToMark']?>" id="selectedUser" style="border:0; font-size:24px; background: transparent" readonly="true"><br>
@@ -45,8 +45,23 @@ require "header.php";
           </div>
           <hr>
           <div class="col-auto" id="rate-upload">
-            <p><strong>Upload Image</strong><small> (optional) </small></p>
-            <button class="btn btn-secondary" type="input">Select File</button>
+                <p><strong>Select image to upload </strong><small>(max 16 kb - 75 px)</small>:</p>
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <div>
+                  <br>
+                  <?php
+                  if (!empty($_SESSION['memberReview'][2])) {
+                    echo '
+                      <p>Current Image:</p>
+                      <img src="data:'.$_SESSION['memberReview'][3].';base64,'.$_SESSION['memberReview'][2].'" alt="upload image" width="80px" />
+                      <div class="custom-control custom-checkbox">
+                          <br>
+                          <input type="checkbox" class="custom-control-input" id="deleteImage" name="deleteImage" value="1">
+                          <label class="custom-control-label" for="deleteImage">Delete the uploaded image <small>(submit to confirm)</small></label>
+                      </div>';
+                  }
+                  ?>
+                </div>
           </div>
           <hr>
           <div class="col-auto">
