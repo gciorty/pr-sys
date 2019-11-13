@@ -1,5 +1,12 @@
 // CREATE GROUP TABLE
 
+CREATE TABLE images (
+    PK_ID int (10) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    type varchar(64),
+    name varchar(64),
+    alt tinytext,
+    image blob
+);
 
 CREATE TABLE users (
     PK_ID int (10) AUTO_INCREMENT PRIMARY KEY NOT NULL,
