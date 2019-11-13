@@ -30,7 +30,13 @@
                   if ($_GET['error'] == "captchaerr") {
                       echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
                   }
+              } else if (isset($_GET['logout'])) {
+                  if ($_GET['logout'] == "success") {
+                      setcookie('UserID', '', time()-3600);
+                  }
               }
+
+              //setcookie('UserID', '', time()-3600);
           ?>
         </div>
         <div class="login-page">
