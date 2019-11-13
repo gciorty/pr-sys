@@ -21,9 +21,11 @@
                       echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Please fill all fields.</div>';
                   } else if ($_GET['error'] == "invalidemail") {
                       echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Please use valid email address</div>';
+                  } else if ($_GET['error'] == "captchaerr") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
+                  } else if ($_GET['error'] == "groupFull") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> The selected group already has 3 members enrolled Try Again.</div>';
                   }
-                } else if ($_GET['error'] == "captchaerr") {
-                    echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
                 }
               if (isset($_GET['signup'])) {
                   if ($_GET['signup'] == "success") {

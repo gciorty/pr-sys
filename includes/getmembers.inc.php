@@ -5,7 +5,7 @@ require 'dbh.inc.php';
 if (isset($_SESSION['userID'])) {
   $groupMembers = array();
   $groupID = $_SESSION['groupID'];
-  $sql = "SELECT userID FROM users WHERE FK_GroupID=?";
+  $sql = "SELECT userID FROM users WHERE GroupID=?";
   $stmt = mysqli_stmt_init($connection);
 
   if (!mysqli_stmt_prepare($stmt,$sql)) {

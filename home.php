@@ -42,10 +42,14 @@ require "header.php";
                 $_COOKIE['UserId'] = $_SESSION['userID'];
               }
                 echo '<p>You are logged in to the System</p>';
-                if(isset($_COOKIE['UserID'])){
-                  echo '<p>Your userID: ' . $_COOKIE['UserID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
+                if($_SESSION['userID'] == 0){
+                  echo '<p>Welcome <strong>Tutor</strong> - Please Review the Evaluations</p>';
                 } else {
-                    echo '<p>Your userID: ' . $_SESSION['userID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
+                  if(isset($_COOKIE['UserID'])){
+                    echo '<p>Your userID: ' . $_COOKIE['UserID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
+                  } else {
+                      echo '<p>Your userID: ' . $_SESSION['userID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
+                  }
                 }
             }
           ?>
