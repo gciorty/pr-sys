@@ -6,7 +6,9 @@ require "includes/getmembers.inc.php"
   <body>
     <div class="container my-3 py-3 z-depth-1">
       <div class="jumbotron">
-        <h1 class="display-4">Member Evaluation Form</h1>
+        <div class="col-auto">
+          <p class="display-4">Member Evaluation Form</p>
+        </div>
         <p class="lead">Please select a member from the drop-down menu and add your review.</p>
         <hr>
         <div class="col-auto">

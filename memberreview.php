@@ -5,7 +5,9 @@ require "header.php";
   <body>
     <div class="container my-3 py-3 z-depth-1">
       <div class="jumbotron">
-        <h1 class="display-4">Member Evaluation Form</h1>
+        <div class="col-auto">
+          <p class="display-4">Member Evaluation Form</p>
+        </div>
         <p class="lead">Please evaluate your member.</p>
         <hr>
         <form name="review-form" class="review-form" action="includes/performeval.inc.php" method="post" enctype="multipart/form-data">

@@ -26,6 +26,12 @@ CREATE TABLE reviews (
   FK_MarkedUserID int(10)
 );
 
+SELECT DISTINCT GroupID FROM `users` where GroupID is not null
+
+SELECT userID FROM `users` WHERE userID NOT IN (0)
+
+SELECT rateValue, rateJustification, image, imagetype FROM `reviews` WHERE (FK_MarkedUserID = 888899999 AND finalized = 1)
+
 ALTER TABLE reviews
 ADD FOREIGN KEY (FK_Marker) REFERENCES users(userID);
 
