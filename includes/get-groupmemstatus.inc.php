@@ -8,7 +8,7 @@ if (isset($_POST['selectgroup-submit'])){
     $gMembers = array();
     $groupID = $_POST['groupToManage'];
 
-    $sql = "SELECT userID FROM users WHERE GroupID=?";
+    $sql = "SELECT userID,email FROM users WHERE GroupID=?";
     $stmt = mysqli_stmt_init($connection);
 
     if (!mysqli_stmt_prepare($stmt,$sql)) {
@@ -30,20 +30,23 @@ if (isset($_POST['selectgroup-submit'])){
         $stmt = mysqli_stmt_init($connection);
         $count = 0;
         foreach ($gMembers as $m) {
-          if (!mysqli_stmt_prepare($stmt,$sql)) {
-              echo 'Sql connetion error';
-              exit();
-          } else {
-            mysqli_stmt_bind_param($stmt, "i", $m);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $tmp = mysqli_fetch_array($result);
-            $count += $tmp[0];
+          if (!is_nan($m)){
+            if (!mysqli_stmt_prepare($stmt,$sql)) {
+                echo 'Sql connetion error';
+                exit();
+            } else {
+              mysqli_stmt_bind_param($stmt, "i", $m);
+              mysqli_stmt_execute($stmt);
+              $result = mysqli_stmt_get_result($stmt);
+              $tmp = mysqli_fetch_array($result);
+              $count += $tmp[0];
+            }
           }
         }
         //######///
         $_SESSION['count'] = $count;
         $_SESSION['gMembers'] = $gMembers;
+        $_SESSION['groupID'] = $groupID;
         header("Location: ../managegroup.php?");
         exit();
     }

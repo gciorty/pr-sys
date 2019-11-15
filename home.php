@@ -11,6 +11,9 @@ require "header.php";
               if ($_GET['success'] == "reviewdeleted") {
                   echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> You have delete the review for the member.</div>';
               }
+              if ($_GET['success'] == "reminderSent") {
+                  echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> The reminder to submit and finalize the reviews has been sent to all the memebers of the group.</div>';
+              }
           } else if (isset($_GET['error'])) {
               if ($_GET['error'] == "finalized") {
                   echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> You finalized the review for the specific member.</div>';

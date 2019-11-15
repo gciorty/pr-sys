@@ -8,7 +8,7 @@ require "header.php";
         <div class="col-auto">
           <p class="display-4">Group Management</p>
         </div>
-        <p class="lead">Specific Group Management</p>
+        <p class="lead">Submission Status of Group <?php echo $_SESSION['groupID'];?></p>
         <hr>
         <div class="col-auto">
           <div>
@@ -17,17 +17,20 @@ require "header.php";
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Student ID</th>
+                  <th scope="col">Student Email</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $i = 1;
-                  foreach ($_SESSION['gMembers'] as $m) {
+                  $length = count($_SESSION['gMembers']);
+                  $line = 1;
+                  for ($i = 0; $i < $length; $i = $i + 2) {
                     echo '<tr>
-                            <th scope="row">'.$i.'</th>
-                            <td>'.$m.'</td>
-                          </tr>';
-                    $i++;
+                               <th scope="row">'.$line.'</th>
+                               <td>'.$_SESSION['gMembers'][$i].'</td>
+                               <td>'.$_SESSION['gMembers'][$i+1].'</td>
+                             </tr>';
+                    $line++;
                   }
                 ?>
               </tbody>
@@ -36,16 +39,18 @@ require "header.php";
           <br>
           <div>
             <div class="shadow-sm p-3 mb-5 bg-white rounded">
-            <?php
-              if ($_SESSION['count'] < 6) {
-                echo '<p>The group has finalized '.$_SESSION['count'].' peer reviews.</p>';
-                echo '<button class="btn btn-primary" name="reminderemail-submit" type="submit">Send Reminder Email</button>';
-              } else if ($_SESSION['count'] == 6) {
-                echo '<p>The group has finalzied all the peer reviews.</p>';
-                echo '<button class="btn btn-primary" name="evalemail-submit" type="submit">Send Evaluation Overall Email</button>';
-              }
-            ?></div>
-
+              <form name="emailForm" action="includes/sendemail.inc.php" method="post">
+                <?php
+                  if ($_SESSION['count'] < 6) {
+                    echo '<p>The group has finalized <strong>'.$_SESSION['count'].'</strong> out of 6 peer reviews.</p>';
+                    echo '<button class="btn btn-primary" name="reminderemail-submit" type="submit" ">Send Reminder Email</button>';
+                  } else if ($_SESSION['count'] == 6) {
+                    echo '<p>The group has finalzied all the peer reviews.</p>';
+                    echo '<button class="btn btn-primary" name="evalemail-submit" type="submit">Send Evaluation Overall Email</button>';
+                  }
+                ?>
+              </form>
+            </div>
             <button class="btn btn-primary" name="goback-submit" onclick="goBack()">Go Back</button>
           </div>
         </div>
