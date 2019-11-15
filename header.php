@@ -83,6 +83,19 @@ if (!isset($_SESSION['userID'])) {
                   }
                 ?>
                 <?php
+                  if ($_SESSION['userID'] == 0) {
+                    if (basename($_SERVER['PHP_SELF']) == 'search.php'){
+                      echo '<li class="nav-item" >
+                              <a class="nav-link" style="color:white" href="search.php" active>Search</a>
+                            </li>';
+                    } else {
+                        echo '<li class="nav-item" >
+                                <a class="nav-link"  href="search.php">Search</a>
+                              </li>';
+                    }
+                  }
+                ?>
+                <?php
                   if (basename($_SERVER['PHP_SELF']) == 'about.php'){
                     echo '<li class="nav-item">
                             <a class="nav-link" style="color:white" href="about.php" active>About</a>

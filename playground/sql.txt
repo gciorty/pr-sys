@@ -26,6 +26,8 @@ CREATE TABLE reviews (
   FK_MarkedUserID int(10)
 );
 
+SELECT userID FROM users WHERE userID LIKE '%10%'
+
 SELECT DISTINCT GroupID FROM `users` where GroupID is not null
 
 SELECT userID FROM `users` WHERE userID NOT IN (0)

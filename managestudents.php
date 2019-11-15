@@ -3,8 +3,8 @@ require "header.php";
 require "includes/get-activestudents.php"
 ?>
 
-<body>
 <html>
+<body>
   <div class="container my-3 py-3 z-depth-1">
     <div class="jumbotron">
       <div class="col-auto">
@@ -16,7 +16,7 @@ require "includes/get-activestudents.php"
       <form name="memberListForm" action="includes/get-studenteval.inc.php" method="post">
         <div>
           <select class="custom-select mr-sm-1" name="studentToEvaluate" id="inlineFormCustomSelect"  >
-            <option selected>Select student to manage</option>
+            <option selected disabled>Select student to manage</option>
             <?php
               foreach ($students as $s) {
                 echo '<option value="'.$s.'">ID: '.$s.'</option>';
@@ -32,8 +32,9 @@ require "includes/get-activestudents.php"
       </div>
     </div>
   </div>
-</html>
 </body>
+</html>
+
 <?php
 require "footer.php"
 ?>

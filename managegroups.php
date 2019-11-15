@@ -3,8 +3,9 @@ require "header.php";
 require "includes/get-activegroups.php"
 ?>
 
-<body>
+
 <html>
+<body>
 <div class="container my-3 py-3 z-depth-1">
   <div class="jumbotron">
     <div class="col-auto">
@@ -32,8 +33,9 @@ require "includes/get-activegroups.php"
     </div>
   </div>
 </div>
-</html>
 </body>
+</html>
+
 <?php
 require "footer.php"
 ?>
