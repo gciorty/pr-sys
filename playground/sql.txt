@@ -32,6 +32,10 @@ SELECT userID FROM `users` WHERE userID NOT IN (0)
 
 SELECT rateValue, rateJustification, image, imagetype FROM `reviews` WHERE (FK_MarkedUserID = 888899999 AND finalized = 1)
 
+SELECT COUNT(*)
+FROM reviews
+WHERE FK_Marker = 123456789;
+
 ALTER TABLE reviews
 ADD FOREIGN KEY (FK_Marker) REFERENCES users(userID);
 

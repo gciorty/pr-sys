@@ -34,7 +34,7 @@ require "header.php";
                       echo '<td><img src="data:'.$_SESSION['studentEval'][4].';base64,'.$_SESSION['studentEval'][3].'" alt="image" width="50px" /></td>
                           </tr>';
                     } else if (empty($_SESSION['studentEval'][3])) {
-                      echo '<td>Image not Available</td>
+                      echo '<td>N/A</td>
                           </tr>';
                     }
                   } else if ($_SESSION['nReviews'] == 2) {
@@ -69,7 +69,15 @@ require "header.php";
           </table>
           </div>
             <hr>
-            <div class="shadow-sm p-3 mb-5 bg-white rounded"><?php if (!is_nan($_SESSION['overallGrade'])) { echo 'The overall peer reviews grade is: '.$_SESSION['overallGrade']; } else { echo 'The student has not been marked yet.'; } ?></div>
+            <div class="shadow-sm p-3 mb-5 bg-white rounded">
+              <?php
+                if (!is_nan($_SESSION['overallGrade'])) {
+                  echo 'The overall peer reviews grade is: '.$_SESSION['overallGrade'];
+                } else {
+                  echo 'The student has not been marked yet.';
+                }
+              ?>
+            </div>
           <div>
             <button class="btn btn-primary" name="goback-submit" onclick="goBack()">Go Back</button>
           </div>

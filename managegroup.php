@@ -22,7 +22,7 @@ require "header.php";
               <tbody>
                 <?php
                   $i = 1;
-                  foreach ($_SESSION['$gMembers'] as $m) {
+                  foreach ($_SESSION['gMembers'] as $m) {
                     echo '<tr>
                             <th scope="row">'.$i.'</th>
                             <td>'.$m.'</td>
@@ -35,8 +35,18 @@ require "header.php";
           </div>
           <br>
           <div>
-            <button class="btn btn-primary" name="reminderemail-submit" type="submit">Send Reminder Email</button>
-            <button class="btn btn-primary" name="evalemail-submit" type="submit">Send Evaluation Overall</button>
+            <div class="shadow-sm p-3 mb-5 bg-white rounded">
+            <?php
+              if ($_SESSION['count'] < 6) {
+                echo '<p>The group has finalized '.$_SESSION['count'].' peer reviews.</p>';
+                echo '<button class="btn btn-primary" name="reminderemail-submit" type="submit">Send Reminder Email</button>';
+              } else if ($_SESSION['count'] == 6) {
+                echo '<p>The group has finalzied all the peer reviews.</p>';
+                echo '<button class="btn btn-primary" name="evalemail-submit" type="submit">Send Evaluation Overall Email</button>';
+              }
+            ?></div>
+
+            <button class="btn btn-primary" name="goback-submit" onclick="goBack()">Go Back</button>
           </div>
         </div>
       </div>

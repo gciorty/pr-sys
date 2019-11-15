@@ -1,6 +1,6 @@
 <?php
 require "header.php";
-require "includes/getmembers.inc.php"
+require "includes/get-members.inc.php"
 ?>
 <html>
   <body>
@@ -12,7 +12,7 @@ require "includes/getmembers.inc.php"
         <p class="lead">Please select a member from the drop-down menu and add your review.</p>
         <hr>
         <div class="col-auto">
-        <form name="memberListForm" action="includes/getmemeval.inc.php" method="post">
+        <form name="memberListForm" action="includes/get-memeval.inc.php" method="post">
           <div>
             <select class="custom-select mr-sm-1" name="memberToMark" id="inlineFormCustomSelect"  >
               <option selected>Choose group member to evaluate</option>

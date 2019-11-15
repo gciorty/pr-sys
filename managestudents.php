@@ -13,7 +13,7 @@ require "includes/get-activestudents.php"
       <p class="lead">In this area you can select the student and see details<small> (shows only student enrolled to the system)</small></p>
       <hr>
       <div class="col-auto">
-      <form name="memberListForm" action="includes/get-studenteval.php" method="post">
+      <form name="memberListForm" action="includes/get-studenteval.inc.php" method="post">
         <div>
           <select class="custom-select mr-sm-1" name="studentToEvaluate" id="inlineFormCustomSelect"  >
             <option selected>Select student to manage</option>
