@@ -15,41 +15,25 @@ require "header.php";
       <div class="col-auto">
         <form class="form-inline" name="SearchForm" action="includes/get-searchstudents.inc.php" method="post">
           <select class="custom-select mr-sm-1" name="searchStudentBy" id="selectSearchStudent"  >
-            <option selected value="ID">Search by ID</option>
-            <option value="higher">Search by grade higher than..</option>
+            <option value="ID">Search by ID</option>
+            <option value="higher">Search by grade greater or equal than..</option>
             <option value="lower">Search by grade lower than..</option>
+          </select>
+          <select class="custom-select mr-sm-1" name="itemPage" id="selectItemPAge">
+            <option value="5" selected>Results per page (default 5)</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">50</option>
           </select>
           <input type="text" name="searchString" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <button class="btn btn-outline-secondary" name="search-submit" type="submit">Search</button>
         </form>
       </div>
       <hr>
-    <div class="col-auto">
-      <?php
-
-        if (!empty($_SESSION['searchResults'])){
-          echo '<table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Student ID</th>
-                    </tr>
-                  </thead>
-                  <tbody>';
-                  $length = count($_SESSION['searchResults']);
-                  $line = 1;
-          foreach ($_SESSION['searchResults'] as $s) {
-            echo ' <tr>
-                       <th scope="row">'.$line.'</th>
-                       <td>'.$s.'</td>
-                     </tr>';
-            $line++;
-          }
-          echo '</tbody>
-              </table>';
-        }
-      ?>
-    </div>
+      <div class="col-auto">
+        <iframe class="col-auto" src="searchresult.php" frameborder="0" style="width:100%;" onload="resizeIframe(this)"></iframe>
+      <div>
     </div>
   </div>
 </body>

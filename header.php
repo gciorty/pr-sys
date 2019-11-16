@@ -26,6 +26,11 @@ if (!isset($_SESSION['userID'])) {
             window.history.back();
           }
         </script>
+        <script>
+          function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+          }
+        </script>
     </head>
 
     <body>
