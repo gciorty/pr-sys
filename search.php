@@ -8,7 +8,7 @@ require "header.php";
   <div class="container my-3 py-3 z-depth-1">
     <div class="jumbotron">
       <div class="col-auto">
-        <p class="display-4">Search</p>
+        <p class="display-4">Search Form</p>
       </div>
       <p class="lead">In this area you can search students by ID or by grade<small> (shows only student enrolled to the system)</small></p>
       <hr>
