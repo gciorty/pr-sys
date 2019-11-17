@@ -3,19 +3,19 @@
 // Please acknowledge use of this code by including this header.
 
 // initialise image with dimensions of 120 x 30 pixels
-$image = @imagecreatetruecolor(120, 30) or die("Cannot Initialize new GD image stream");
+$image = @imagecreatetruecolor(150, 30) or die("Cannot Initialize new GD image stream");
 
-// set background to white and allocate drawing colours
-$background = imagecolorallocate($image, 0x66, 0x99, 0x66);
+// set background and allocate drawing colours
+$background = imagecolorallocate($image, 0x66, 0xCC, 0xFF);
 imagefill($image, 0, 0, $background);
-$linecolor = imagecolorallocate($image, 0x99, 0xCC, 0x99);
+$linecolor = imagecolorallocate($image, 0x33, 0x99, 0xCC);
 $textcolor1 = imagecolorallocate($image, 0x00, 0x00, 0x00);
 $textcolor2 = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
 
 // draw random lines on canvas
-for($i=0; $i < 6; $i++) {
+for($i=0; $i < 8; $i++) {
   imagesetthickness($image, rand(1,3));
-  imageline($image, 0, rand(0,30), 120, rand(0,30), $linecolor);
+  imageline($image, rand(0,150), 0, rand(0,150), 30 , $linecolor);
 }
 
 session_start();

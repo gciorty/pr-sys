@@ -45,7 +45,7 @@
               <input type="text" name="userID" placeholder="User ID"/>
               <input type="password" name="pwd" placeholder="Password"/>
               <p><input type="text" name="captcha" placeholder="Enter CAPTCHA code below"></p>
-              <p><img src="includes/captcha.inc.php" width="120" height="30" border="1" alt="CAPTCHA" id="capt"></p>
+              <p><img src="includes/captcha.inc.php" width="150" height="30" border="1" alt="CAPTCHA" id="capt"></p>
               <p class="message">Click <a href="#" onClick=reloadCaptcha();><strong>here</strong></a> to reload</p>
               <p></p>
               <button type="submit" name="login-submit">login</button>
