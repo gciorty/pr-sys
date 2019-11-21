@@ -49,7 +49,7 @@ if (!isset($_SESSION['userID'])) {
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
               <ul class="navbar-nav">
                 <?php
-                  if ($_SESSION['userID'] != 0) {
+                  if ($_SESSION['userID'] != "000000000") {
                     if (basename($_SERVER['PHP_SELF']) == 'members.php'){
                       echo '<li class="nav-item" >
                               <a class="nav-link" style="color:white" href="members.php" active>Group Members</a>
@@ -62,7 +62,7 @@ if (!isset($_SESSION['userID'])) {
                   }
                 ?>
                 <?php
-                  if ($_SESSION['userID'] == 0) {
+                  if ($_SESSION['userID'] == "000000000") {
                     if (basename($_SERVER['PHP_SELF']) == 'managegroups.php'){
                       echo '<li class="nav-item" >
                               <a class="nav-link" style="color:white" href="managegroups.php" active>Groups</a>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['userID'])) {
                   }
                 ?>
                 <?php
-                  if ($_SESSION['userID'] == 0) {
+                  if ($_SESSION['userID'] == "000000000") {
                     if (basename($_SERVER['PHP_SELF']) == 'managestudents.php'){
                       echo '<li class="nav-item" >
                               <a class="nav-link" style="color:white" href="managestudents.php" active>Students</a>
@@ -88,7 +88,7 @@ if (!isset($_SESSION['userID'])) {
                   }
                 ?>
                 <?php
-                  if ($_SESSION['userID'] == 0) {
+                  if ($_SESSION['userID'] == "000000000") {
                     if (basename($_SERVER['PHP_SELF']) == 'search.php'){
                       echo '<li class="nav-item" >
                               <a class="nav-link" style="color:white" href="search.php" active>Search</a>

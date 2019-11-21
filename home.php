@@ -18,6 +18,9 @@ require "header.php";
               if ($_GET['success'] == "overallSent") {
                   echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> The email with the overall rating of the group has been sent to all the members.</div>';
               }
+              if ($_GET['success'] == "reviewSaved") {
+                  echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Success!</strong> You review was saved to the system.</div>';
+              }
           } else if (isset($_GET['error'])) {
               if ($_GET['error'] == "finalized") {
                   echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> You finalized the review for the specific member.</div>';
@@ -36,7 +39,7 @@ require "header.php";
         <div class="col-lg-8 text-center">
           <!--Image-->
           <div class="view overlay z-depth-1-half">
-            <img src="/pr-sys/img/UoG_BLACK.png" class="img-fluid" alt="">
+            <img src="/~gc8298r/img/UoG_BLACK.png" class="img-fluid" alt="">
           </div>
 
           <h3 class="font-weight-bold mb-4">Welcome to the Peer Review System</h3>
@@ -49,7 +52,7 @@ require "header.php";
                 $_COOKIE['UserId'] = $_SESSION['userID'];
               }
                 echo '<p>You are logged in to the System</p>';
-                if($_SESSION['userID'] == 0){
+                if($_SESSION['userID'] == "000000000"){
                   echo '<p>Welcome <strong>Tutor</strong> - Please Review the Evaluations</p>';
                 } else {
                   if(isset($_COOKIE['UserID'])){

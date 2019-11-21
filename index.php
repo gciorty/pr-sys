@@ -30,6 +30,12 @@
                   if ($_GET['error'] == "captchaerr") {
                       echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong captcha code typed. Try Again.</div>';
                   }
+                  if ($_GET['error'] == "wrongpwd") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> Wrong pasword typed. Try Again.</div>';
+                  }
+                  if ($_GET['error'] == "nouser") {
+                      echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> User not registered. Try Again.</div>';
+                  }
               } else if (isset($_GET['logout'])) {
                   if ($_GET['logout'] == "success") {
                       setcookie('UserID', '', time()-3600);

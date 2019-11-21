@@ -30,7 +30,7 @@ require "header.php";
         <div class="col-lg-8 text-center">
           <!--Image-->
           <div class="view overlay z-depth-1-half">
-            <img src="/pr-sys/img/UoG_BLACK.png" class="img-fluid" alt="">
+            <img src="/~gc8298r/img/UoG_BLACK.png" class="img-fluid" alt="">
           </div>
 
           <h3 class="font-weight-bold mb-4">Peer Review System</h3>
