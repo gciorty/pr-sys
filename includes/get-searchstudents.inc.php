@@ -17,7 +17,7 @@ if (isset($_POST['search-submit'])){
           echo 'Sql connetion error';
           exit();
       } else {
-        mysqli_stmt_bind_param($stmt, "i", $searchString);
+        mysqli_stmt_bind_param($stmt, "s", $searchString);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
@@ -64,7 +64,7 @@ if (isset($_POST['search-submit'])){
             foreach ($students as $student) {
               $nReviews = 0;
               $studentEval = array();
-              mysqli_stmt_bind_param($stmt, "ii", $student, $finalized);
+              mysqli_stmt_bind_param($stmt, "si", $student, $finalized);
               mysqli_stmt_execute($stmt);
               $result = mysqli_stmt_get_result($stmt);
 

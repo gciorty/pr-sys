@@ -16,7 +16,7 @@ if (isset($_POST['selectstudent-submit'])){
         echo 'Sql connetion error';
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "ii", $studentID, $finalized);
+        mysqli_stmt_bind_param($stmt, "si", $studentID, $finalized);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         while ($row = mysqli_fetch_array($result, MYSQLI_NUM))

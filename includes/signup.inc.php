@@ -11,27 +11,27 @@ if (isset($_POST['signup-submit'])) { //check that the request comes from signup
   $captcha = $_POST['captcha'];
 
   if (empty($username) || empty($email )|| empty($password) || empty($repeatPassword) || empty($captcha) || empty($group)) {
-      header("Location: ../signup.php?error=emptyfields&uid=".$username."&email=".$email);
+      header("Location: ../signup.php?error=emptyfields&uid=".$username."&email=".$email."&group=".$group);
       exit();
   }
   else if ($captcha != $_SESSION['digit']) {
-      header("Location: ../signup.php?error=captchaerr");
+      header("Location: ../signup.php?error=captchaerr&uid=".$username."&email=".$email."&group=".$group);
       exit();
   }
   else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      header("Location: ../signup.php?error=invalidemailformat");
+      header("Location: ../signup.php?error=invalidemailformat&uid=".$username."&email=".$email."&group=".$group);
       exit();
   }
   else if (!preg_match("/^[0-9]{9,10}$/", $username)) {
-      header("Location: ../signup.php?error=invalidUserID");
+      header("Location: ../signup.php?error=invalidUserID&uid=".$username."&email=".$email."&group=".$group);
       exit();
   }
   else if (!preg_match("/((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,32})/", $password)) {
-      header("Location: ../signup.php?error=passwordStrenght");
+      header("Location: ../signup.php?error=passwordStrenght&uid=".$username."&email=".$email."&group=".$group);
       exit();
   }
   else if ($password !== $repeatPassword) {
-      header("Location: ../signup.php?error=pwdNotMatch");
+      header("Location: ../signup.php?error=pwdNotMatch&uid=".$username."&email=".$email."&group=".$group);
       exit();
   }
   else {
@@ -46,7 +46,7 @@ if (isset($_POST['signup-submit'])) { //check that the request comes from signup
           mysqli_stmt_store_result($stmt);
           $resultCheck = mysqli_stmt_num_rows($stmt);
           if ($resultCheck > 0) {
-              header("Location: ../signup.php?error=usertaken&email=".$email);
+              header("Location: ../signup.php?error=usertaken&uid=".$username."&email=".$email."&group=".$group);
               exit();
           } else {
               $sql = "SELECT userID FROM users WHERE GroupID=?";
@@ -60,7 +60,7 @@ if (isset($_POST['signup-submit'])) { //check that the request comes from signup
                 mysqli_stmt_store_result($stmt);
                 $resultCheck = mysqli_stmt_num_rows($stmt);
                 if ($resultCheck >= 3) {
-                    header("Location: ../signup.php?error=groupFull");
+                    header("Location: ../signup.php?error=groupFull&uid=".$username."&email=".$email."&group=".$group);
                     exit();
                 } else {
                   $sql = "INSERT INTO users (userID, email, pwdUser, GroupID) VALUES (?, ?, ?, ?)";

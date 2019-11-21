@@ -4,7 +4,7 @@ session_start();
 require 'dbh.inc.php';
 
 if (isset($_POST['selectgroup-submit'])){
-  if ($_SESSION['userID'] == 0) {
+  if ($_SESSION['userID'] == "000000000") {
     $gMembers = array();
     $groupID = $_POST['groupToManage'];
 
@@ -35,7 +35,7 @@ if (isset($_POST['selectgroup-submit'])){
                 echo 'Sql connetion error';
                 exit();
             } else {
-              mysqli_stmt_bind_param($stmt, "i", $m);
+              mysqli_stmt_bind_param($stmt, "s", $m);
               mysqli_stmt_execute($stmt);
               $result = mysqli_stmt_get_result($stmt);
               $tmp = mysqli_fetch_array($result);

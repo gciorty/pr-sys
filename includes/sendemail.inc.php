@@ -4,12 +4,12 @@ session_start();
 if (isset($_POST['reminderemail-submit'])){
   if($_SESSION['userID'] == 0) {
     $length = count($_SESSION['gMembers']);
-    $subject = 'Peer Review Submission Reminder';
-    $message = 'Please login to the Peer Review System and submit your members evaluation.';
-    $headers = 'From: sigfilippoberio@gmail.com';
+    $subject = "Peer Review Submission Reminder";
+    $message = "Please login to the Peer Review System and submit your members evaluation.";
+    $headers = "From: gc8298r@gre.ac.uk\r\n";
     for ($i = 1; $i < $length; $i = $i + 2) {
       $to_email = $_SESSION['gMembers'][$i];
-      mail($to_email,$subject,$message,$headers);
+      mail($to_email, $subject, $message, $headers);
     }
     header("Location: ../home.php?success=reminderSent");
   }
@@ -36,9 +36,9 @@ if (isset($_POST['reminderemail-submit'])){
       }
     }
     $length = count($_SESSION['gMembers']);
-    $subject = 'Peer Review Submission Overall';
+    $subject = "Peer Review Submission Overall";
     $message = join("\r\n",$membersAverage);
-    $headers = 'From: sigfilippoberio@gmail.com';
+    $headers = "From: gc8298r@gre.ac.uk\r\n";
     for ($i = 1; $i < $length; $i = $i + 2) {
       $to_email = $_SESSION['gMembers'][$i];
       mail($to_email,$subject,$message,$headers);

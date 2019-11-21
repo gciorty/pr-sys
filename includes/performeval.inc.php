@@ -67,7 +67,7 @@ if (empty($rateValue) || empty($rateJustification) || empty($marker) || empty($m
         }
         mysqli_stmt_bind_param($stmt, "isssiss", $rateValue, $rateJustification, $image, $imagetype, $finalized, $marker, $markedUserID );
         mysqli_stmt_execute($stmt);
-        header("Location: ../home.php?success");
+        header("Location: ../home.php?success=reviewSaved");
         exit();
       }
     } else {
@@ -82,7 +82,7 @@ if (empty($rateValue) || empty($rateJustification) || empty($marker) || empty($m
         }
         mysqli_stmt_bind_param($stmt, "isssiss", $rateValue, $rateJustification, $image, $imagetype,  $finalized, $marker, $markedUserID );
         mysqli_stmt_execute($stmt);
-        header("Location: ../home.php?success");
+        header("Location: ../home.php?success=reviewSaved");
         exit();
       }
     }
