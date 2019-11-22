@@ -8,12 +8,9 @@ if (isset($_POST['login-submit'])) { //check that the request comes from login-s
   $password = $_POST['pwd'];
   $captcha = $_POST['captcha'];
 
-  if (empty($userID) || empty($password) || empty($captcha)) {
+  if (empty($userID) || empty($password)) {
       header("Location: ../index.php?error=emptyfields");
       exit();
-  } else if ($captcha != $_SESSION['digit']){
-    header("Location: ../index.php?error=captchaerr");
-    exit();
   } else {
       $sql = "SELECT * FROM users where userID=?;";
       $stmt = mysqli_stmt_init($connection);
