@@ -11,23 +11,26 @@ require "includes/get-activegroups.php"
     <div class="col-auto">
       <p class="display-4">Group Management</p>
     </div>
-    <p class="lead">In this area you can select the group and see the reviews status<small> (empty groups will not show up)</small></p>
+    <p class="lead">In this area you can select the group and see the reviews status<small> (empty groups will not show up - please select available group form drop down menu)</small></p>
     <hr>
     <div class="col-auto">
     <form name="groupsListForm" action="includes/get-groupmemstatus.inc.php" method="post">
       <div>
         <select class="custom-select mr-sm-1" name="groupToManage" id="inlineFormCustomSelect"  >
-          <option selected>Select group to manage</option>
           <?php
-            foreach ($groups as $g) {
-              echo '<option value="'.$g.'">Group '.$g.'</option>';
+            if(empty($groups)) {
+              echo '<option disabled>No Group Members Enrolled Yet</option>';
+            } else {
+              foreach ($groups as $g) {
+                echo '<option value="'.$g.'">Group '.$g.'</option>';
+              }
             }
           ?>
         </select>
       </div>
       <br>
       <div>
-        <button class="btn btn-primary" name="selectgroup-submit" type="submit">Confirm Selection</button>
+        <button class="btn btn-primary" name="selectgroup-submit" type="submit" <?php if(empty($groups)){ echo 'disabled'; } ?>>Confirm Selection</button>
       </div>
     </form>
     </div>

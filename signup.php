@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<?php
+require "includes/get-availgroups.inc.php";
+?>
 <html>
 
     <head>
@@ -72,16 +74,16 @@
                     <div class="form-group">
                       <label>Select Group</label>
                       <select name="group" required="" style="width:100%;background:#f2f2f2;font-size: 14px;color: #606060; padding: 15px; margin: 0 0 15px;border: 0;" >
-                        <option value="1" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "1") { echo "selected"; }  } ?> >Group 1</option>
-                        <option value="2" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "2") { echo "selected"; }  } ?>>Group 2</option>
-                        <option value="3" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "3") { echo "selected"; }  } ?>>Group 3</option>
-                        <option value="4" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "4") { echo "selected"; }  } ?>>Group 4</option>
-                        <option value="5" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "5") { echo "selected"; }  } ?>>Group 5</option>
-                        <option value="6" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "6") { echo "selected"; }  } ?>>Group 6</option>
-                        <option value="7" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "7") { echo "selected"; }  } ?>>Group 7</option>
-                        <option value="8" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "8") { echo "selected"; }  } ?>>Group 8</option>
-                        <option value="9" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "9") { echo "selected"; }  } ?>>Group 9</option>
-                        <option value="10" <?php if (isset($_REQUEST['group'])) { if ($_REQUEST['group'] == "10") { echo "selected"; }  } ?>>Group 10</option>
+                        <?php
+                          foreach ($availGroups as $g) {
+                            if (isset($_REQUEST['group'])) {
+                              if ($_REQUEST['group'] == $g) {
+                                echo '<option value="'.$g.'" selected>Group '.$g.'</option>';
+                              }
+                            }
+                            echo '<option value="'.$g.'" >Group '.$g.'</option>';
+                          }
+                        ?>
                       </select>
                     </div>
                     <div class="form-group">

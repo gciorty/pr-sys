@@ -49,3 +49,25 @@ INSERT INTO users (userID, email, pwdUser, FK_GroupID) VALUES ('456456456', 'tes
 INSERT INTO reviews (rateValue, rateJustification, finalized, FK_Marker, FK_MarkedUserID) VALUES ('456456456', 'testicolo@gmail.com', 'Test123', 0)
 
 ALTER TABLE users ADD UNIQUE (userID)
+
+SELECT AVG(rateValue) FROM reviews WHERE finalized=1 AND FK_MarkedUserID = 888899991
+
+select FK_MarkedUserID, avg(ratevalue)
+from reviews where finalized=1
+group by FK_MarkedUserID
+HAVING AVG(ratevalue) >= 6
+LIMIT 0,2;
+
+SELECT
+    COUNT(*)
+FROM
+    (
+        SELECT
+            FK_MarkedUserID, avg(ratevalue)
+        FROM
+            reviews
+        WHERE
+            finalized=1
+        group by FK_MarkedUserID
+		HAVING AVG(ratevalue) >= 9
+    ) AS DerivedTableAlias

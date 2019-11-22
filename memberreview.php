@@ -4,6 +4,11 @@ require "header.php";
 <html>
   <body>
     <div class="container my-3 py-3 z-depth-1">
+      <?php
+      if (!empty($_SESSION['memberReview'][4]) == 1) {
+            echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> The review was already finalized - The review cannot be edited.</div>';
+        }
+      ?>
       <div class="jumbotron">
         <div class="col-auto">
           <p class="display-4">Member Evaluation Form</p>
@@ -23,7 +28,15 @@ require "header.php";
                 for ($i = 1; $i <= 10; $i++) {
                   echo '<input type="radio" name="rating" value="'.$i.'">'.$i.'';
                 }
-              } else {
+              } else if ($_SESSION['memberReview'][4] == 1) {
+                  for ($i = 1; $i <= 10; $i++) {
+                    if ($_SESSION['memberReview'][0] == $i){
+                      echo '<input type="radio" name="rating" value="'.$i.'" checked disabled>'.$i.'';
+                    } else {
+                      echo '<input type="radio" name="rating" value="'.$i.'" disabled>'.$i.'';
+                    }
+                  }
+                } else {
                 for ($i = 1; $i <= 10; $i++) {
                   if ($_SESSION['memberReview'][0] == $i){
                     echo '<input type="radio" name="rating" value="'.$i.'" checked>'.$i.'';
@@ -37,18 +50,18 @@ require "header.php";
           <hr>
           <div class="col-auto">
             <p><strong>Rate Justification</strong></p>
-            <textarea class="form-control" name="ratejus" id="rate-form" rows="3"><?php
+            <textarea class="form-control" name="ratejus" id="rate-form" rows="3" <?php if (!empty($_SESSION['memberReview'][4]) == 1) { echo 'disabled';} ?> ><?php
               if (empty($_SESSION['memberReview'][1])) {
                   echo '';
               } else {
-                echo $_SESSION['memberReview'][1];
+                echo htmlentities($_SESSION['memberReview'][1]);
               }
             ?></textarea>
           </div>
           <hr>
           <div class="col-auto" id="rate-upload">
                 <p><strong>Select image to upload </strong><small>(max 16 kb - 75 px)</small>:</p>
-                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="file" name="fileToUpload" id="fileToUpload" <?php if (!empty($_SESSION['memberReview'][4]) == 1) { echo 'disabled';} ?>>
                 <div>
                   <br>
                   <?php
@@ -72,7 +85,7 @@ require "header.php";
                 <label class="custom-control-label" for="finalizeMark">Check the box to finalize the evaluation <small>(cannot be changed)</small></label>
             </div>
             <br>
-            <button class="btn btn-primary" name="review-form" type="submit">Submit Evaluation</button>
+            <button class="btn btn-primary" name="review-form" type="submit" <?php if (!empty($_SESSION['memberReview'][4]) == 1) { echo 'disabled';} ?> >Submit Evaluation</button>
 
           </div>
         </form>
@@ -80,22 +93,11 @@ require "header.php";
         <div class="col-auto">
           <form name="del-eval" class="del-eval" action="includes/deleval.inc.php" method="post">
             <p>Becareful! This deletes the provisioned evaluation submitted</p>
-            <button class="btn btn-danger" name="delete-review" type="submit">Delete Evaluation</button>
+            <button class="btn btn-danger" name="delete-review" type="submit" <?php if (!empty($_SESSION['memberReview'][4]) == 1) { echo 'disabled';} ?> >Delete Evaluation</button>
           </form>
         </div>
       </div>
     </div>
-
-    <script type="text/javascript">
-      function resetForm() {
-        document.getElementById("rate-form").value = "";
-        var radioButton = document.getElementsByName("rating");
-        for(var i=0; i<radioButton.length; i++)
-           radioButton[i].checked = false;
-        console.log('reset form actioned');
-      }
-    </script>
-
   </body>
 </html>
 

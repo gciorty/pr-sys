@@ -4,7 +4,7 @@ require 'dbh.inc.php';
 
 if (isset($_SESSION['userID'])) {
   $groups = array();
-  $sql = "SELECT DISTINCT GroupID FROM users where GroupID is not null";
+  $sql = "SELECT DISTINCT GroupID FROM users where GroupID is not null ORDER BY GroupID ASC";
   $stmt = mysqli_stmt_init($connection);
 
   if (!mysqli_stmt_prepare($stmt,$sql)) {

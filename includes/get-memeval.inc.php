@@ -28,11 +28,7 @@
         }
       }
       $_SESSION['memberReview'] = $mReview;
-      if ($_SESSION['memberReview'][4] == 0) {
-        header("Location: ../memberreview.php");
-      } else if ($_SESSION['memberReview'][4] == 1) {
-        header("Location: ../home.php?error=finalized");
-      }
+      header("Location: ../memberreview.php");
 
     }
   } else {

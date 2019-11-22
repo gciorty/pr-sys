@@ -42,7 +42,7 @@ require "header.php";
                             <th scope="row">1</th>
                             <td>'.$_SESSION['studentEval'][0].'</td>
                             <td>'.$_SESSION['studentEval'][1].'</td>
-                            <td>'.$_SESSION['studentEval'][2].'</td>';
+                            <td>'.htmlentities($_SESSION['studentEval'][2]).'</td>';
                     if (!empty($_SESSION['studentEval'][3])) {
                       echo '<td><img src="data:'.$_SESSION['studentEval'][4].';base64,'.$_SESSION['studentEval'][3].'" alt="image" width="50px" /></td>
                           </tr>';
@@ -55,7 +55,7 @@ require "header.php";
                             <th scope="row">2</th>
                             <td>'.$_SESSION['studentEval'][5].'</td>
                             <td>'.$_SESSION['studentEval'][6].'</td>
-                            <td>'.$_SESSION['studentEval'][7].'</td>';
+                            <td>'.htmlentities($_SESSION['studentEval'][7]).'</td>';
                     if (!empty($_SESSION['studentEval'][8])) {
                       echo '<td><img src="data:'.$_SESSION['studentEval'][9].';base64,'.$_SESSION['studentEval'][8].'" alt="image" width="50px" /></td>
                           </tr>';

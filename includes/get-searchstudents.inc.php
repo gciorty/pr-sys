@@ -3,21 +3,45 @@ session_start();
 
 require 'dbh.inc.php';
 
-if (isset($_POST['search-submit'])){
+if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
   if ($_SESSION['userID'] == 0) {
     $searchResults = array();
     $searchString = $_POST['searchString'];
     $searchType = $_POST['searchStudentBy'];
+    $itemPage = 5;
+    if (isset($_POST['selectedPage'])) {
+      $selectedPage = $_POST['selectedPage'];
+    } else {
+      $selectedPage = 1;
+    }
+    $startIndex = ($selectedPage * 5) - 5;
 
     if ($searchType == 'ID') {
-      $sql = "SELECT userID FROM users WHERE userID LIKE '%{$searchString}%' ";
+      // fetch number of users
+      $sql = "SELECT COUNT(*) FROM users WHERE userID LIKE '%{$searchString}%' ";
+      $stmt = mysqli_stmt_init($connection);
+
+      if (!mysqli_stmt_prepare($stmt,$sql)) {
+          header("Location: ../managestudents.php?error=sqlerror");
+          exit();
+      } else {
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
+        {
+          $_SESSION['resultPages'] = $row[0];
+        }
+      }
+
+      // fetch userIDs
+      $sql = "SELECT userID FROM users WHERE userID LIKE '%{$searchString}%' LIMIT ?,?";
       $stmt = mysqli_stmt_init($connection);
 
       if (!mysqli_stmt_prepare($stmt,$sql)) {
           echo 'Sql connetion error';
           exit();
       } else {
-        mysqli_stmt_bind_param($stmt, "s", $searchString);
+        mysqli_stmt_bind_param($stmt, "ss", $startIndex, $itemPage);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
@@ -29,76 +53,76 @@ if (isset($_POST['search-submit'])){
             }
           }
         }
+        $_SESSION['searchString'] = $searchString;
         $_SESSION['searchResults'] = $searchResults;
         $_SESSION['searchType'] = $searchType;
-        $_SESSION['itemPage'] = $_POST['itemPage'];
-        header("Location: ../search.php?");
+        $_SESSION['itemPage'] = $itemPage;
+        $_SESSION['startIndex'] = $startIndex;
+        header("Location: ../managestudents.php");
       }
     }
+
     if ($searchType == "higher" || $searchType == "lower") {
-      $students = array();
-      $sql = "SELECT userID FROM users WHERE userID NOT IN (0)";
+      $searchResults = array();
+      $finalized = 1;
+      // fetch user count with average higher or equal than
+      if ($searchType == "higher") {
+          $sql = "SELECT COUNT(*) FROM ( SELECT FK_MarkedUserID, avg(ratevalue) FROM reviews WHERE finalized=? group by FK_MarkedUserID HAVING AVG(ratevalue) >= ?) AS DerivedTableAlias";
+      }
+      if ($searchType == "lower") {
+          $sql = "SELECT COUNT(*) FROM ( SELECT FK_MarkedUserID, avg(ratevalue) FROM reviews WHERE finalized=? group by FK_MarkedUserID HAVING AVG(ratevalue) < ?) AS DerivedTableAlias";
+      }
+
       $stmt = mysqli_stmt_init($connection);
 
       if (!mysqli_stmt_prepare($stmt,$sql)) {
-          echo 'Sql connetion error';
+          header("Location: ../managestudents.php?error=sqlerror");
           exit();
       } else {
+        mysqli_stmt_bind_param($stmt, "is", $finalized, $searchString);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
+        {
+          $_SESSION['resultPages'] = $row[0];
+        }
+
+        // fetch the actual users using itempage limit (fetches 5 items at the time from db)
+        if ($searchType == "higher") {
+          $sql = "SELECT FK_MarkedUserID, avg(ratevalue) FROM reviews WHERE finalized=? GROUP BY FK_MarkedUserID HAVING AVG(ratevalue) >= ? LIMIT ?,?;";
+        }
+        if ($searchType == "lower") {
+          $sql = "SELECT FK_MarkedUserID, avg(ratevalue) FROM reviews WHERE finalized=? GROUP BY FK_MarkedUserID HAVING AVG(ratevalue) < ? LIMIT ?,?;";
+        }
+
+        $stmt = mysqli_stmt_init($connection);
+        if (!mysqli_stmt_prepare($stmt,$sql)) {
+            header("Location: ../managestudents.php?error=sqlerror");
+            exit();
+        } else {
+          mysqli_stmt_bind_param($stmt, "isss", $finalized, $searchString, $startIndex, $itemPage);
           mysqli_stmt_execute($stmt);
           $result = mysqli_stmt_get_result($stmt);
           while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
           {
             foreach ($row as $r)
             {
-              array_push($students,$r);
+              array_push($searchResults,$r);
             }
           }
-          $finalized = 1;
-          $sql = "SELECT rateValue FROM reviews WHERE FK_MarkedUserID=? AND finalized=?";
-          $stmt = mysqli_stmt_init($connection);
-
-          if (!mysqli_stmt_prepare($stmt,$sql)) {
-              echo 'Sql connetion error';
-              exit();
-          } else {
-            foreach ($students as $student) {
-              $nReviews = 0;
-              $studentEval = array();
-              mysqli_stmt_bind_param($stmt, "si", $student, $finalized);
-              mysqli_stmt_execute($stmt);
-              $result = mysqli_stmt_get_result($stmt);
-
-              while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
-              {
-                foreach ($row as $r)
-                {
-                    array_push($studentEval,$r);
-                }
-                $nReviews++;
-              }
-              $overallGrade = ($studentEval[0] + $studentEval[1]) / $nReviews;
-              $sValue = (int)$searchString;
-              if ($searchType == "higher") {
-                if ($overallGrade >= $sValue) {
-                  array_push($searchResults, $student);
-                  array_push($searchResults, $overallGrade);
-                }
-              }
-              if ($searchType == "lower") {
-                if ($overallGrade < $sValue) {
-                  array_push($searchResults, $student);
-                  array_push($searchResults, $overallGrade);
-                }
-              }
-            }
-            $_SESSION['searchResultsGrade'] = $searchResults;
-            $_SESSION['searchType'] = $searchType;
-            $_SESSION['itemPage'] = $_POST['itemPage'];
-            header("Location: ../search.php?");
-          }
+        }
+        //$_SESSION['resultPages'] = $resultCheck;
+        $_SESSION['searchString'] = $searchString;
+        $_SESSION['searchResults'] = $searchResults;
+        $_SESSION['searchType'] = $searchType;
+        $_SESSION['itemPage'] = $itemPage;
+        $_SESSION['startIndex'] = $startIndex;
+        header("Location: ../managestudents.php");
       }
     }
   }
+} else {
+  header("Location: ../managestudents.php?error=requestError");
 }
 
 

@@ -15,17 +15,20 @@ require "includes/get-members.inc.php"
         <form name="memberListForm" action="includes/get-memeval.inc.php" method="post">
           <div>
             <select class="custom-select mr-sm-1" name="memberToMark" id="inlineFormCustomSelect"  >
-              <option selected>Choose group member to evaluate</option>
               <?php
-                foreach ($groupMembers as $member) {
-                  echo '<option value="'.$member.'">'.$member.'</option>';
+                if(empty($groupMembers)) {
+                  echo '<option disabled>No Group Members Enrolled Yet</option>';
+                } else {
+                  foreach ($groupMembers as $member) {
+                    echo '<option value="'.$member.'">'.$member.'</option>';
+                  }
                 }
               ?>
             </select>
           </div>
           <br>
           <div>
-            <button class="btn btn-primary" name="selectmem-submit" type="submit">Confirm Selection</button>
+            <button class="btn btn-primary" name="selectmem-submit" type="submit" <?php if(empty($groupMembers)){ echo 'disabled'; } ?>>Confirm Selection</button>
           </div>
         </form>
         </div>
