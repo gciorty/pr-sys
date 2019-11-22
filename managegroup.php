@@ -18,6 +18,7 @@ require "header.php";
                   <th scope="col">#</th>
                   <th scope="col">Student ID</th>
                   <th scope="col">Student Email</th>
+                  <th scope="col">Details</th>
                 </tr>
               </thead>
               <tbody>
@@ -29,6 +30,12 @@ require "header.php";
                                <th scope="row">'.$line.'</th>
                                <td>'.$_SESSION['gMembers'][$i].'</td>
                                <td>'.$_SESSION['gMembers'][$i+1].'</td>
+                               <td>
+                                <form action="includes/get-studenteval.inc.php" method="post" target="_parent">
+                                  <input type="hidden" name="studentToEvaluate" value="'.$_SESSION['gMembers'][$i].'">
+                                  <button class="btn btn-light" name="selectstudent-submit" type="submit">View Details</button>
+                                </form>
+                               </td>
                              </tr>';
                     $line++;
                   }

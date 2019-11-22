@@ -8,13 +8,13 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
     $searchResults = array();
     $searchString = $_POST['searchString'];
     $searchType = $_POST['searchStudentBy'];
-    $itemPage = 5;
+    $itemPage = $_POST['itemPage'];
     if (isset($_POST['selectedPage'])) {
       $selectedPage = $_POST['selectedPage'];
     } else {
       $selectedPage = 1;
     }
-    $startIndex = ($selectedPage * 5) - 5;
+    $startIndex = ($selectedPage * $itemPage) - $itemPage;
 
     if ($searchType == 'ID') {
       // fetch number of users
@@ -58,6 +58,7 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
         $_SESSION['searchType'] = $searchType;
         $_SESSION['itemPage'] = $itemPage;
         $_SESSION['startIndex'] = $startIndex;
+        $_SESSION['selectedPage'] = $selectedPage;
         header("Location: ../managestudents.php");
       }
     }
@@ -117,6 +118,7 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
         $_SESSION['searchType'] = $searchType;
         $_SESSION['itemPage'] = $itemPage;
         $_SESSION['startIndex'] = $startIndex;
+        $_SESSION['selectedPage'] = $selectedPage;
         header("Location: ../managestudents.php");
       }
     }

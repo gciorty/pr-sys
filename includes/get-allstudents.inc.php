@@ -55,6 +55,7 @@ if ($_SESSION['userID'] == "000000000") {
       $_SESSION['searchResults'] = $searchResults;
       $_SESSION['itemPage'] = $itemPage;
       $_SESSION['startIndex'] = $startIndex;
+      $_SESSION['selectedPage'] = $selectedPage;
       header("Location: ../managestudents.php");
   }
 }

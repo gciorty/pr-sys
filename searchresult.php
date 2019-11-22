@@ -87,6 +87,10 @@ session_start();
             $pages++;
           }
         }
+        if ($_SESSION['searchType'] == "allstudents") {
+          echo '<h3>Viewing All Students</h3>';
+        }
+
         echo '<br>
               <nav aria-label="page-nav">
                 <ul class="pagination">
@@ -95,12 +99,30 @@ session_start();
                 </li>';
         for ($i = 0; $i < $pages; $i++) {
           $page = $i + 1;
-          echo  '<li class="page-item">
-                  <form action="includes/get-allstudents.inc.php" method="post" target="_parent">
-                    <input type="hidden" name="selectedPage" value="'.$page.'">
-                    <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
-                </form></li>';
+          if (isset($_SESSION['selectedPage'])){
+            if ($_SESSION['selectedPage'] == $page){
+              echo  '<li class="page-item">
+                      <form action="includes/get-allstudents.inc.php" method="post" target="_parent">
+                        <input type="hidden" name="selectedPage" value="'.$page.'">
+                        <button class="btn btn-dark" name="pageselect-submit" type="submit">'.$page.'</button>
+                    </form></li>';
+            } else {
+              echo  '<li class="page-item">
+                      <form action="includes/get-allstudents.inc.php" method="post" target="_parent">
+                        <input type="hidden" name="selectedPage" value="'.$page.'">
+                        <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
+                    </form></li>';
+            }
+          } else {
+            echo  '<li class="page-item">
+                    <form action="includes/get-allstudents.inc.php" method="post" target="_parent">
+                      <input type="hidden" name="selectedPage" value="'.$page.'">
+                      <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
+                  </form></li>';
+          }
         }
+
+
         echo '  </ul>
               </nav>';
 
@@ -130,6 +152,7 @@ session_start();
         }
         echo '</tbody>
                   </table>';
+
       } else if (!empty($_SESSION['searchResults']) && $_SESSION['searchType'] == "ID"){
           if (isset($_GET['page'])) {
             $selectedPage = $_GET['page'];
@@ -140,6 +163,9 @@ session_start();
               $pages++;
             }
           }
+          if ($_SESSION['searchType'] == "ID") {
+            echo '<h3>Viewing Search by ID: "'.$_SESSION['searchString'].'" </h3>';
+          }
           echo '<br>
                 <nav aria-label="page-nav">
                   <ul class="pagination">
@@ -148,13 +174,38 @@ session_start();
                   </li>';
           for ($i = 0; $i < $pages; $i++) {
             $page = $i + 1;
-            echo  '<li class="page-item">
-                    <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
-                      <input type="hidden" name="selectedPage" value="'.$page.'">
-                      <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
-                      <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
-                      <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
-                  </form></li>';
+            if (isset($_SESSION['selectedPage'])){
+              if ($_SESSION['selectedPage'] == $page){
+                echo  '<li class="page-item">
+                        <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
+                          <input type="hidden" name="selectedPage" value="'.$page.'">
+                          <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                          <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
+                          <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
+                          <button class="btn btn-dark" name="pageselect-submit" type="submit">'.$page.'</button>
+                      </form></li>';
+              } else {
+                echo  '<li class="page-item">
+                        <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
+                          <input type="hidden" name="selectedPage" value="'.$page.'">
+                          <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                          <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
+                          <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
+                          <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
+                      </form></li>';
+              }
+            } else {
+              echo  '<li class="page-item">
+                      <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
+                        <input type="hidden" name="selectedPage" value="'.$page.'">
+                        <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                        <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
+                        <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
+                        <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
+                    </form></li>';
+            }
+
+
           }
           echo '  </ul>
                 </nav>';
@@ -195,6 +246,12 @@ session_start();
                 $pages++;
               }
             }
+            if ($_SESSION['searchType'] == "higher") {
+              echo '<h3>Viewing Students with grade higher or equal than: '.$_SESSION['searchString'].'</h3>';
+            }
+            if ($_SESSION['searchType'] == "lower") {
+              echo '<h3>Viewing Students with grade lower than: '.$_SESSION['searchString'].'</h3>';
+            }
             echo '<br>
                   <nav aria-label="page-nav">
                     <ul class="pagination">
@@ -203,13 +260,36 @@ session_start();
                     </li>';
             for ($i = 0; $i < $pages; $i++) {
               $page = $i + 1;
-              echo  '<li class="page-item">
-                      <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
-                        <input type="hidden" name="selectedPage" value="'.$page.'">
-                        <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
-                        <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
-                        <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
-                    </form></li>';
+              if (isset($_SESSION['selectedPage'])){
+                if ($_SESSION['selectedPage'] == $page){
+                  echo  '<li class="page-item">
+                          <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
+                            <input type="hidden" name="selectedPage" value="'.$page.'">
+                            <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                            <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
+                            <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
+                            <button class="btn btn-dark" name="pageselect-submit" type="submit">'.$page.'</button>
+                        </form></li>';
+                } else {
+                  echo  '<li class="page-item">
+                          <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
+                            <input type="hidden" name="selectedPage" value="'.$page.'">
+                            <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                            <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
+                            <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
+                            <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
+                        </form></li>';
+                }
+              } else {
+                echo  '<li class="page-item">
+                        <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
+                          <input type="hidden" name="selectedPage" value="'.$page.'">
+                          <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                          <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
+                          <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
+                          <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
+                      </form></li>';
+              }
             }
             echo '    <li class="page-item disabled">
                         <button class="btn btn-light" onclick="sortTable(1)">Sort Grades</button>
@@ -247,7 +327,6 @@ session_start();
                   }
                   echo '</tbody>
                             </table>';
-
         } else {
           echo '<div class="alert-light" role="alert">
                   Click show all students or perform search to show results.
