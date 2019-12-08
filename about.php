@@ -37,7 +37,7 @@ require "header.php";
 
           <p class="text-muted"><strong>Author:</strong> Gabriel Ciortea</p>
           <p class="text-muted"><strong>Student ID:</strong> 000968052</p>
-          <p class="text-muted"><strong>Coursework:</strong> COMP-XXXX Web Application Development</p>
+          <p class="text-muted"><strong>Coursework:</strong> COMP-1687 Web Application Development</p>
         </div>
         <!--Grid column-->
 
