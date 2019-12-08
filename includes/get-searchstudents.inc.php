@@ -59,6 +59,8 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
         $_SESSION['itemPage'] = $itemPage;
         $_SESSION['startIndex'] = $startIndex;
         $_SESSION['selectedPage'] = $selectedPage;
+        setcookie('searchString', $searchString, time() + (86400 * 30), "/");
+        setcookie('searchType', $searchType, time() + (86400 * 30), "/");
         header("Location: ../managestudents.php");
       }
     }
@@ -119,6 +121,8 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
         $_SESSION['itemPage'] = $itemPage;
         $_SESSION['startIndex'] = $startIndex;
         $_SESSION['selectedPage'] = $selectedPage;
+        setcookie('searchString', $searchString, time() + (86400 * 30), "/");
+        setcookie('searchType', $searchType, time() + (86400 * 30), "/");
         header("Location: ../managestudents.php");
       }
     }

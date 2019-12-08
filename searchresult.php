@@ -153,7 +153,7 @@ session_start();
         echo '</tbody>
                   </table>';
 
-      } else if (!empty($_SESSION['searchResults']) && $_SESSION['searchType'] == "ID"){
+      } else if (!empty($_SESSION['searchResults']) && $_COOKIE['searchType'] == "ID"){
           if (isset($_GET['page'])) {
             $selectedPage = $_GET['page'];
           }
@@ -163,8 +163,8 @@ session_start();
               $pages++;
             }
           }
-          if ($_SESSION['searchType'] == "ID") {
-            echo '<h3>Viewing Search by ID: "'.$_SESSION['searchString'].'" </h3>';
+          if ($_COOKIE['searchType'] == "ID") {
+            echo '<h3>Viewing Search by ID: "'.$_COOKIE['searchString'].'" </h3>';
           }
           echo '<br>
                 <nav aria-label="page-nav">
@@ -236,7 +236,7 @@ session_start();
           }
           echo '</tbody>
                     </table>';
-        } else if (!empty($_SESSION['searchResults']) && ($_SESSION['searchType'] == "higher" || $_SESSION['searchType'] == "lower")) {
+        } else if (!empty($_SESSION['searchResults']) && ($_COOKIE['searchType'] == "higher" || $_COOKIE['searchType'] == "lower")) {
             if (isset($_GET['page'])) {
               $selectedPage = $_GET['page'];
             }
@@ -246,11 +246,11 @@ session_start();
                 $pages++;
               }
             }
-            if ($_SESSION['searchType'] == "higher") {
-              echo '<h3>Viewing Students with grade higher or equal than: '.$_SESSION['searchString'].'</h3>';
+            if ($_COOKIE['searchType'] == "higher") {
+              echo '<h3>Viewing Students with grade higher or equal than: '.$_COOKIE['searchString'].'</h3>';
             }
-            if ($_SESSION['searchType'] == "lower") {
-              echo '<h3>Viewing Students with grade lower than: '.$_SESSION['searchString'].'</h3>';
+            if ($_COOKIE['searchType'] == "lower") {
+              echo '<h3>Viewing Students with grade lower than: '.$_COOKIE['searchString'].'</h3>';
             }
             echo '<br>
                   <nav aria-label="page-nav">

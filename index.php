@@ -28,10 +28,6 @@
                 if ($_GET['error'] == "nouser") {
                     echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> User not registered. Try Again.</div>';
                 }
-            } else if (isset($_GET['logout'])) {
-                if ($_GET['logout'] == "success") {
-                    setcookie('UserID', '', time()-3600);
-                }
             }
         ?>
         <div class="jumbotron">
@@ -48,7 +44,7 @@
                   <form class="form" role="form" autocomplete="off" action="includes/login.inc.php" method="post">
                       <div class="form-group">
                           <label for="userID">User ID</label>
-                          <input type="number" class="form-control" name="userID" required="">
+                          <input type="number" class="form-control" name="userID" value="<?php if (isset($_COOKIE['UserID'])) { echo $_COOKIE['UserID']; }  ?>" required="">
                       </div>
                       <div class="form-group">
                           <label>Password</label>

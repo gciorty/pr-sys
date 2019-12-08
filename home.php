@@ -26,6 +26,9 @@ require "header.php";
                   echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> You finalized the review for the specific member.</div>';
               }
           }
+          if (!isset($_COOKIE['cookieConsent'])){
+            setcookie('cookieConsent','NonApproved',time() + (86400 * 30), "/");
+          }
       ?>
     </div>
     <div class="jumbotron">
@@ -47,21 +50,15 @@ require "header.php";
           <p class="text-muted">
             <?php
             if (isset($_SESSION['userID'])) {
-              if(!isset($_COOKIE['UserID'])) {
-                setcookie('UserID', $_SESSION['userID']);
-                $_COOKIE['UserId'] = $_SESSION['userID'];
-              }
                 echo '<p>You are logged in to the System</p>';
                 if($_SESSION['userID'] == "000000000"){
                   echo '<p>Welcome <strong>Tutor</strong> - Please Review the Evaluations</p>';
                 } else {
-                  if(isset($_COOKIE['UserID'])){
-                    echo '<p>Your userID: ' . $_COOKIE['UserID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
-                  } else {
-                      echo '<p>Your userID: ' . $_SESSION['userID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
-                  }
+                    echo '<p>Your userID: ' . $_SESSION['userID'] . ' - Member of Group ' . $_SESSION['groupID'] . '</p>';
                 }
             }
+            setcookie('UserID', $_SESSION['userID']);
+            $_COOKIE['UserId'] = $_SESSION['userID'];
           ?>
         </p>
 

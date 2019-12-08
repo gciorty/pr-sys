@@ -5,8 +5,13 @@ require "header.php";
   <body>
     <div class="container my-3 py-3 z-depth-1">
       <?php
-      if (!empty($_SESSION['memberReview'][4]) == 1) {
+        if (!empty($_SESSION['memberReview'][4]) == 1) {
             echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> The review was already finalized - The review cannot be edited.</div>';
+        }
+        if (isset($_GET['error'])) {
+            if ($_GET['error'] == "fileLarge") {
+                echo '<div class="alert"><span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span><strong>Error!</strong> File too large. Plase make sure it is smaller than 16 kb and retry.</div>';
+            }
         }
       ?>
       <div class="jumbotron">

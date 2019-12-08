@@ -61,7 +61,7 @@ require "includes/get-availgroups.inc.php";
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="text" class="form-control" name="email" required="" value="<?php echo isset($_REQUEST['email']) ? $_REQUEST['email'] : '' ?>">
+                        <input type="email" class="form-control" name="email" required="" value="<?php echo isset($_REQUEST['email']) ? $_REQUEST['email'] : '' ?>">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
