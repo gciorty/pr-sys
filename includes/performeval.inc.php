@@ -56,12 +56,7 @@ if (empty($rateValue) || empty($rateJustification) || empty($marker) || empty($m
     mysqli_stmt_store_result($stmt);
     $resultCheck = mysqli_stmt_num_rows($stmt);
     if ($resultCheck > 0) {
-      if (empty($image)) {
-        $sql = "UPDATE reviews SET rateValue=? , rateJustification=?, finalized=? WHERE (FK_Marker=? AND FK_MarkedUserID=?);";
-      } else {
-        $sql = "UPDATE reviews SET rateValue=? , rateJustification=?, image=?, imagetype=?, finalized=? WHERE (FK_Marker=? AND FK_MarkedUserID=?);";
-      }
-
+      $sql = "UPDATE reviews SET rateValue=? , rateJustification=?, image=?, imagetype=?, finalized=? WHERE (FK_Marker=? AND FK_MarkedUserID=?);";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt,$sql)) {
         header("Location: ../memberreview.php?error=sqlerror");
@@ -70,12 +65,7 @@ if (empty($rateValue) || empty($rateJustification) || empty($marker) || empty($m
         if ($finalized == NULL) {
           $finalized = 0;
         }
-        if (empty($image)) {
-          mysqli_stmt_bind_param($stmt, "isiss", $rateValue, $rateJustification, $finalized, $marker, $markedUserID );
-        } else {
-          mysqli_stmt_bind_param($stmt, "isssiss", $rateValue, $rateJustification, $image, $imagetype, $finalized, $marker, $markedUserID );
-        }
-
+        mysqli_stmt_bind_param($stmt, "isssiss", $rateValue, $rateJustification, $image, $imagetype, $finalized, $marker, $markedUserID );
         mysqli_stmt_execute($stmt);
         header("Location: ../home.php?success=reviewSaved");
         exit();
