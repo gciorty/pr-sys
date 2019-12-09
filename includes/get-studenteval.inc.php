@@ -1,12 +1,11 @@
 <?php
-session_start();
 
 require 'dbh.inc.php';
 
-if (isset($_POST['selectstudent-submit'])){
-  if ($_SESSION['userID'] == 0) {
+if (isset($_GET['studentToEvaluate'])){
+  if ($_SESSION['userID'] == "000000000") {
     $studentEval = array();
-    $studentID = $_POST['studentToEvaluate'];
+    $studentID = $_GET['studentToEvaluate'];
     $finalized = 1;
     $nReviews = 0;
     $sql = "SELECT FK_Marker, rateValue, rateJustification, image, imagetype FROM reviews WHERE (FK_MarkedUserID = ? AND finalized = ?)";
@@ -27,13 +26,13 @@ if (isset($_POST['selectstudent-submit'])){
           }
           $nReviews++;
         }
-        $_SESSION['studentEval'] = $studentEval;
-        $_SESSION['nReviews'] = $nReviews;
-
-        $_SESSION['overallGrade'] = ($studentEval[1] + $studentEval[6]) / $nReviews;
-
-        $_SESSION['studentID'] = $studentID;
-        header("Location: ../studenteval.php");
+        if ($nReviews == 2 ) {
+          $overallGrade = ($studentEval[1] + $studentEval[6]) / $nReviews;
+        } else if ($nReviews == 1 ){
+          $overallGrade = $studentEval[1];
+        } else {
+          $overallGrade = 0;
+        }
     }
   } else {
     header("Location: ../index.php");

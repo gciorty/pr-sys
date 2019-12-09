@@ -1,13 +1,11 @@
 <?php
-session_start();
 
 require 'dbh.inc.php';
 
-if (isset($_POST['selectgroup-submit'])){
+if (isset($_GET['groupToManage'])){
   if ($_SESSION['userID'] == "000000000") {
     $gMembers = array();
-    $groupID = $_POST['groupToManage'];
-
+    $groupID = $_GET['groupToManage'];
     $sql = "SELECT userID,email FROM users WHERE GroupID=?";
     $stmt = mysqli_stmt_init($connection);
 
@@ -30,7 +28,7 @@ if (isset($_POST['selectgroup-submit'])){
         $stmt = mysqli_stmt_init($connection);
         $count = 0;
         foreach ($gMembers as $m) {
-          if (!is_nan($m)){
+          if ($m != "000000000"){
             if (!mysqli_stmt_prepare($stmt,$sql)) {
                 echo 'Sql connetion error';
                 exit();
@@ -43,12 +41,6 @@ if (isset($_POST['selectgroup-submit'])){
             }
           }
         }
-        //######///
-        $_SESSION['count'] = $count;
-        $_SESSION['gMembers'] = $gMembers;
-        $_SESSION['groupID'] = $groupID;
-        header("Location: ../managegroup.php?");
-        exit();
     }
   } else {
     header("Location: ../index.php");
@@ -58,5 +50,4 @@ if (isset($_POST['selectgroup-submit'])){
   header("Location: ../index.php");
   exit();
 }
-
 ?>

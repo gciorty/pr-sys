@@ -53,7 +53,6 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
             }
           }
         }
-        $_SESSION['searchString'] = $searchString;
         $_SESSION['searchResults'] = $searchResults;
         $_SESSION['searchType'] = $searchType;
         $_SESSION['itemPage'] = $itemPage;
@@ -114,8 +113,6 @@ if (isset($_POST['search-submit']) || isset($_POST['pageselect-submit'])){
             }
           }
         }
-        //$_SESSION['resultPages'] = $resultCheck;
-        $_SESSION['searchString'] = $searchString;
         $_SESSION['searchResults'] = $searchResults;
         $_SESSION['searchType'] = $searchType;
         $_SESSION['itemPage'] = $itemPage;

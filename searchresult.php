@@ -142,7 +142,7 @@ session_start();
                          <th scope="row">'.$line.'</th>
                          <td>'.$_SESSION['searchResults'][$i].'</td>
                          <td>
-                          <form action="includes/get-studenteval.inc.php" method="post" target="_parent">
+                          <form action="studenteval.php" method="get" target="_parent">
                             <input type="hidden" name="studentToEvaluate" value="'.$_SESSION['searchResults'][$i].'">
                             <button class="btn btn-light" name="selectstudent-submit" type="submit">View Details</button>
                           </form>
@@ -179,7 +179,7 @@ session_start();
                 echo  '<li class="page-item">
                         <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
                           <input type="hidden" name="selectedPage" value="'.$page.'">
-                          <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                          <input type="hidden" name="searchString" value="'.$_COOKIE['searchString'].'">
                           <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
                           <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
                           <button class="btn btn-dark" name="pageselect-submit" type="submit">'.$page.'</button>
@@ -188,7 +188,7 @@ session_start();
                 echo  '<li class="page-item">
                         <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
                           <input type="hidden" name="selectedPage" value="'.$page.'">
-                          <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                          <input type="hidden" name="searchString" value="'.$_COOKIE['searchString'].'">
                           <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
                           <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
                           <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
@@ -198,7 +198,7 @@ session_start();
               echo  '<li class="page-item">
                       <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
                         <input type="hidden" name="selectedPage" value="'.$page.'">
-                        <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                        <input type="hidden" name="searchString" value="'.$_COOKIE['searchString'].'">
                         <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
                         <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
                         <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
@@ -226,7 +226,7 @@ session_start();
                            <th scope="row">'.$line.'</th>
                            <td>'.$_SESSION['searchResults'][$i].'</td>
                            <td>
-                            <form action="includes/get-studenteval.inc.php" method="post" target="_parent">
+                            <form action="studenteval.php" method="get" target="_parent">
                               <input type="hidden" name="studentToEvaluate" value="'.$_SESSION['searchResults'][$i].'">
                               <button class="btn btn-light" name="selectstudent-submit" type="submit">View Details</button>
                             </form>
@@ -265,7 +265,7 @@ session_start();
                   echo  '<li class="page-item">
                           <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
                             <input type="hidden" name="selectedPage" value="'.$page.'">
-                            <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                            <input type="hidden" name="searchString" value="'.$_COOKIE['searchString'].'">
                             <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
                             <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
                             <button class="btn btn-dark" name="pageselect-submit" type="submit">'.$page.'</button>
@@ -274,7 +274,7 @@ session_start();
                   echo  '<li class="page-item">
                           <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
                             <input type="hidden" name="selectedPage" value="'.$page.'">
-                            <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                            <input type="hidden" name="searchString" value="'.$_COOKIE['searchString'].'">
                             <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
                             <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
                             <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
@@ -284,7 +284,7 @@ session_start();
                 echo  '<li class="page-item">
                         <form action="includes/get-searchstudents.inc.php" method="post" target="_parent">
                           <input type="hidden" name="selectedPage" value="'.$page.'">
-                          <input type="hidden" name="searchString" value="'.$_SESSION['searchString'].'">
+                          <input type="hidden" name="searchString" value="'.$_COOKIE['searchString'].'">
                           <input type="hidden" name="searchStudentBy" value="'.$_SESSION['searchType'].'">
                           <input type="hidden" name="itemPage" value="'.$_SESSION['itemPage'].'">
                           <button class="btn btn-light" name="pageselect-submit" type="submit">'.$page.'</button>
@@ -316,7 +316,7 @@ session_start();
                                    <td>'.$_SESSION['searchResults'][$i].'</td>
                                    <td>'.$_SESSION['searchResults'][$i+1].'</td>
                                    <td>
-                                    <form action="includes/get-studenteval.inc.php" method="post" target="_parent">
+                                    <form action="studenteval.php" method="get" target="_parent">
                                       <input type="hidden" name="studentToEvaluate" value="'.$_SESSION['searchResults'][$i].'">
                                       <button class="btn btn-light" name="selectstudent-submit" type="submit">View Details</button>
                                     </form>

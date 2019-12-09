@@ -1,5 +1,6 @@
 <?php
 require "header.php";
+require "includes/get-studenteval.inc.php";
 ?>
 <html>
   <body>
@@ -8,7 +9,7 @@ require "header.php";
         <div class="col-auto">
           <p class="display-4">Student Peer Reviews</p>
         </div>
-        <p class="lead">Student finalized peer reviews for Student ID: <?php echo '<strong>'.$_SESSION['studentID'].'</strong>' ?></p>
+        <p class="lead">Student finalized peer reviews for Student ID: <?php echo '<strong>'.$studentID.'</strong>' ?></p>
         <hr>
         <div class="col-auto">
           <div>
@@ -24,42 +25,42 @@ require "header.php";
               </thead>
               <tbody>
                 <?php
-                  if ($_SESSION['nReviews'] == 1) {
+                  if ($nReviews == 1) {
                     echo '<tr>
                             <th scope="row">1</th>
-                            <td>'.$_SESSION['studentEval'][0].'</td>
-                            <td>'.$_SESSION['studentEval'][1].'</td>
-                            <td>'.htmlentities($_SESSION['studentEval'][2]).'</td>';
-                    if (!empty($_SESSION['studentEval'][3])) {
-                      echo '<td><img src="data:'.$_SESSION['studentEval'][4].';base64,'.$_SESSION['studentEval'][3].'" alt="image" width="50px" /></td>
+                            <td>'.$studentEval[0].'</td>
+                            <td>'.$studentEval[1].'</td>
+                            <td>'.htmlentities($studentEval[2]).'</td>';
+                    if (!empty($studentEval[3])) {
+                      echo '<td><img src="data:'.$studentEval[4].';base64,'.$studentEval[3].'" alt="image" width="50px" /></td>
                           </tr>';
-                    } else if (empty($_SESSION['studentEval'][3])) {
+                    } else if (empty($studentEval[3])) {
                       echo '<td>N/A</td>
                           </tr>';
                     }
-                  } else if ($_SESSION['nReviews'] == 2) {
+                  } else if ($nReviews == 2) {
                     echo '<tr>
                             <th scope="row">1</th>
-                            <td>'.$_SESSION['studentEval'][0].'</td>
-                            <td>'.$_SESSION['studentEval'][1].'</td>
-                            <td>'.htmlentities($_SESSION['studentEval'][2]).'</td>';
-                    if (!empty($_SESSION['studentEval'][3])) {
-                      echo '<td><img src="data:'.$_SESSION['studentEval'][4].';base64,'.$_SESSION['studentEval'][3].'" alt="image" width="50px" /></td>
+                            <td>'.$studentEval[0].'</td>
+                            <td>'.$studentEval[1].'</td>
+                            <td>'.htmlentities($studentEval[2]).'</td>';
+                    if (!empty($studentEval[3])) {
+                      echo '<td><img src="data:'.$studentEval[4].';base64,'.$studentEval[3].'" alt="image" width="50px" /></td>
                           </tr>';
-                    } else if (empty($_SESSION['studentEval'][3])) {
+                    } else if (empty($studentEval[3])) {
                       echo '<td>N/A</td>
                           </tr>';
                     }
                     echo '
                           <tr>
                             <th scope="row">2</th>
-                            <td>'.$_SESSION['studentEval'][5].'</td>
-                            <td>'.$_SESSION['studentEval'][6].'</td>
-                            <td>'.htmlentities($_SESSION['studentEval'][7]).'</td>';
-                    if (!empty($_SESSION['studentEval'][8])) {
-                      echo '<td><img src="data:'.$_SESSION['studentEval'][9].';base64,'.$_SESSION['studentEval'][8].'" alt="image" width="50px" /></td>
+                            <td>'.$studentEval[5].'</td>
+                            <td>'.$studentEval[6].'</td>
+                            <td>'.htmlentities($studentEval[7]).'</td>';
+                    if (!empty($studentEval[8])) {
+                      echo '<td><img src="data:'.$studentEval[9].';base64,'.$studentEval[8].'" alt="image" width="50px" /></td>
                           </tr>';
-                    } else if (empty($_SESSION['studentEval'][8])) {
+                    } else if (empty($studentEval[8])) {
                       echo '<td>N/A</td>
                           </tr>';
                     }
@@ -71,8 +72,8 @@ require "header.php";
             <hr>
             <div class="shadow-sm p-3 mb-5 bg-white rounded">
               <?php
-                if (!is_nan($_SESSION['overallGrade'])) {
-                  echo 'The overall peer reviews grade is: '.$_SESSION['overallGrade'];
+                if (!is_nan($overallGrade)) {
+                  echo 'The overall peer reviews grade is: '.$overallGrade;
                 } else {
                   echo 'The student has not been marked yet.';
                 }

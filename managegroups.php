@@ -14,7 +14,7 @@ require "includes/get-activegroups.php"
     <p class="lead">In this area you can select the group and see the reviews status<small> (empty groups will not show up - please select available group form drop down menu)</small></p>
     <hr>
     <div class="col-auto">
-    <form name="groupsListForm" action="includes/get-groupmemstatus.inc.php" method="post">
+    <form name="groupsListForm" action="managegroup.php" method="get">
       <div>
         <select class="custom-select mr-sm-1" name="groupToManage" id="inlineFormCustomSelect"  >
           <?php
