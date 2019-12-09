@@ -30,7 +30,6 @@ if (isset($_POST['login-submit'])) { //check that the request comes from login-s
               } else if ($pwdCheck == true) {
                   session_start();
                   $_SESSION['userID'] = $row['userID'];
-                  //$_SESSION['email'] = $row['email'];
                   $_SESSION['groupID'] = $row['GroupID'];
                   header("Location: ../home.php?login=success");
                   exit();

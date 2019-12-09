@@ -41,6 +41,7 @@ if (isset($_GET['groupToManage'])){
             }
           }
         }
+        $_SESSION['gMembers'] = $gMembers;
     }
   } else {
     header("Location: ../index.php");
