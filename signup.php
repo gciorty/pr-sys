@@ -85,9 +85,13 @@ require "includes/get-availgroups.inc.php";
                             if (isset($_REQUEST['group'])) {
                               if ($_REQUEST['group'] == $g) {
                                 echo '<option value="'.$g.'" selected>Group '.$g.'</option>';
+                              } else {
+                                echo '<option value="'.$g.'" >Group '.$g.'</option>';
                               }
+                            } else {
+                              echo '<option value="'.$g.'" >Group '.$g.'</option>';
                             }
-                            echo '<option value="'.$g.'" >Group '.$g.'</option>';
+
                           }
                         ?>
                       </select>
